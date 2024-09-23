@@ -116,7 +116,7 @@ with open(sndfile,"w") as fst,open(outfile,"w") as fw:
             def get_sox_cmd(sr,output):
                 # using value lower than 1.0 else sox complains and saturates (16 -> 8 bits probably)
                 # with that value the samples stop cracking!
-                return [sox,"--volume","0.92",wav_file,"--channels","1","--bits","8","-r",str(sr),"--encoding","signed-integer",output]
+                return [sox,"--volume","0.92",wav_file,"--channels","1","-D","--bits","8","-r",str(sr),"--encoding","signed-integer",output]
 
 
             used_sampling_rate = details["sample_rate"]
