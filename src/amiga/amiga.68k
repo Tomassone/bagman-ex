@@ -345,8 +345,6 @@ _user:
 	sne		infinite_pickaxe_time_flag
 	
 	jsr	 _detect_controller_types 
-	clr.b	controller_joypad_0
-	clr.b	controller_joypad_1
 
 	jra		demo_game
 
