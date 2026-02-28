@@ -262,8 +262,8 @@ _user:
     
     * "floppy" file found
     jsr     _LVOClose(a6)
-    * wait 2 seconds for floppy drive to switch off
-    move.l  #100,d1
+    * wait 3 seconds for floppy drive to switch off (if highscore load, takes more time than 2 seconds)
+    move.l  #150,d1
     jsr     _LVODelay(a6)
 .no_floppy:
 
