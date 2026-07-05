@@ -73,7 +73,6 @@ public:
 
   void set_transparency(int rgb);
 
-  // this isn't compatible with blitted images on amiga
   void create(int w, int h, bool alpha = false);
 
 private:

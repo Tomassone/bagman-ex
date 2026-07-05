@@ -54,7 +54,6 @@ GfxObject *GfxObjectLayer::get_item_intersecting(const Locatable *l)
   FOREACH (it,m_object_list)
   {
     GfxObject *o = (*it);
-    // amiga kludge
     // character detection looks ok but with bags, barrow
     // and pickaxe, it seems that bounds include the 16+ width added
     // (why not for characters???) anyway, this kludge allows to reduce width

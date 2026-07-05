@@ -133,7 +133,6 @@ void TileGrid::init()
     {
       // we're using a binary PPM file because with BMP there are palette problems
       // in 8-bit mode: with PPM we don't use SDL and it does not mess the logic image
-      // also compressing the file using Amiga pro-pack so it's super-tiny and can be unpacked on amiga & PC cos
       // we have the unpacking source code in C available :)
       // (I could have used zlib but the thing with RNC is that it provides the unpacked size right away, and it's small)
 

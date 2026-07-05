@@ -55,7 +55,6 @@ SDL_Surface *Cross::init_io(bool silent, bool full_screen, int screen_width,
   // no mouse pointer (what the hell is that for!)
   SDL_ShowCursor(0);
 
-  // In NDS mode, SDL kills everything: create it now
   this->init_console();
   this->init_filesystem();
 
