@@ -224,7 +224,7 @@ void TileGrid::init()
 	    }
 	}
       current_x += 224;
-      LOGGED_DELETE(contents);
+      LOGGED_DELETE_ARRAY(contents);
     }
 }
 

@@ -76,7 +76,7 @@ cout << __FILE__ << ':' \
  * @param t type of @a a and @a b
  */
 
-#define SWAP(a, b, t) { register t swp; swp = a; a = b; b = swp; }
+#define SWAP(a, b, t) { t swp; swp = a; a = b; b = swp; }
 
 /**
  * define a clone method for an object with copy constructor

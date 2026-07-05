@@ -838,7 +838,7 @@ template <class INT_TYPE>
 
   if (hexadecimal)
     {
-      sscanf(this->c_str(),"%x",&value);
+      sscanf(this->c_str(),"%x",(unsigned int*) &value);
     }
   else
     {
