@@ -126,9 +126,7 @@ public:
     DBG_all = 0xFFFFFF         ///< all of the above
   };
 
-#ifdef _WIN32
   typedef std::map<FunctionTimer, FunctionId> ProfilerTable;
-#endif
 
   /**
    * item stored in our custom stack object
