@@ -1,15 +1,21 @@
-inc = include_directories(
-    '.',
-    'engine',
-    'gfx',
-    'characters',
-    'platform',
-)
-
 if host_machine.system() == 'linux'
-    inc += include_directories('platform/linux')
+    inc = include_directories(
+        '.',
+        'engine',
+        'gfx',
+        'characters',
+        'platform',
+        'platform/linux',
+    )
 elif host_machine.system() == 'windows'
-    inc += include_directories('platform/windows')
+    inc = include_directories(
+        '.',
+        'engine',
+        'gfx',
+        'characters',
+        'platform',
+        'platform/windows',
+    )
 endif
 
 common_sources = files(
@@ -101,6 +107,3 @@ executable(
     ],
     install : true
 )
-
-install_subdir('../resource')
-install_subdir('../sound')
