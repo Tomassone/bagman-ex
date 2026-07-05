@@ -48,7 +48,3 @@ What's better in the MAME version:
 
 - exact original AI (of course!)
 - high scores
-
-
-The DS has Bagman running from MarcaDS but the emulator is bug ridden and slow, and lacks voices.
-So I'm happy I could write that one, even if you have to rotate your DS to play
