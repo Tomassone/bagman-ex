@@ -1,12 +1,9 @@
 #pragma once
 
+#include "FunctionTimer.hpp"
 #include "GsDefine.hpp"
 #include "MyMacros.hpp"
 #include "MyString.hpp"
-#if !defined(_NDS) && !defined(__amigaos__)
-#include "FunctionTimer.hpp"
-#endif
-#include "FunctionId.hpp"
 
 #include <list>
 #include <map>
@@ -22,23 +19,22 @@
  * declare the mandatory get_string_type() method for an Abortable inherited
  * object */
 
-#define DEF_GET_STRING_TYPE(name) \
+#define DEF_GET_STRING_TYPE(name)                                              \
   MyString get_string_type() const { return #name; }
-
 
 /**
  * create a reference on a specialized type
  */
 
-#define DECL_CAST_TYPE(typ,specialized_variable,abstract_variable) \
-typ &specialized_variable = safe_cast<typ >(abstract_variable)
+#define DECL_CAST_TYPE(typ, specialized_variable, abstract_variable)           \
+  typ &specialized_variable = safe_cast<typ>(abstract_variable)
 
 /**
  * create a constant reference on a specialized type
  */
 
-#define DECL_CAST_CONST_TYPE(typ,specialized_variable,abstract_variable) \
-DECL_CAST_TYPE(const typ,specialized_variable,abstract_variable)
+#define DECL_CAST_CONST_TYPE(typ, specialized_variable, abstract_variable)     \
+  DECL_CAST_TYPE(const typ, specialized_variable, abstract_variable)
 
 /**
  * kernel debug block start test
@@ -49,12 +45,13 @@ DECL_CAST_TYPE(const typ,specialized_variable,abstract_variable)
 /**
  * entrypoint/exitpoint definitions
  * NDEBUG: no stack/no thread context
- * NDEBUG + NDEBUG_TRACES (can be set locally): simply prints in & out of the methods
+ * NDEBUG + NDEBUG_TRACES (can be set locally): simply prints in & out of the
+ * methods
  */
-#if defined NDEBUG || defined _NDS || defined __amigaos__
+#if defined NDEBUG
 
 #ifdef NDEBUG_TRACE
-#define ENTRYPOINT(mname) debug(get_string_type()+":"+#mname+": enter")
+#define ENTRYPOINT(mname) debug(get_string_type() + ":" + #mname + ": enter")
 #define EXITPOINT debug("exit method")
 #else
 #define ENTRYPOINT(mname) ((void)0)
@@ -62,11 +59,13 @@ DECL_CAST_TYPE(const typ,specialized_variable,abstract_variable)
 #endif
 
 #else
-#define ENTRYPOINT(mname) \
-{ enter_method(#mname,__FILE__,__LINE__)
+#define ENTRYPOINT(mname)                                                      \
+  {                                                                            \
+    enter_method(#mname, __FILE__, __LINE__)
 
-#define EXITPOINT \
-  exit_method(__FILE__,__LINE__); }
+#define EXITPOINT                                                              \
+  exit_method(__FILE__, __LINE__);                                             \
+  }
 #endif
 
 // set USE_FINE_PROFILING in modules where ENTRYPOINT/EXITPOINT
@@ -83,22 +82,23 @@ DECL_CAST_TYPE(const typ,specialized_variable,abstract_variable)
 #define FP_EXITPOINT ((void)0)
 #endif
 
-#define ENTRYPOINT_THROW(m) ENTRYPOINT(m); try {
-#define EXITPOINT_THROW \
-    } catch (const Cause &m) { error(m,true); } EXITPOINT
+#define ENTRYPOINT_THROW(m)                                                    \
+  ENTRYPOINT(m);                                                               \
+  try {
+#define EXITPOINT_THROW                                                        \
+  }                                                                            \
+  catch (const Cause &m) {                                                     \
+    error(m, true);                                                            \
+  }                                                                            \
+  EXITPOINT
 
-#define MSG_ARG_PROTO \
-const MyString &message,			\
-		  const MyString &arg1="",	\
-		  const MyString &arg2="",	\
-		  const MyString &arg3="",	\
-		  const MyString &arg4="",	\
-		  const MyString &arg5="",	\
-		  const MyString &arg6="",	\
-		  const MyString &arg7="",	\
-		  const MyString &arg8="",      \
-                  const MyString &arg9="",      \
-		  const MyString &argA=""
+#define MSG_ARG_PROTO                                                          \
+  const MyString &message,                                                     \
+      const MyString &arg1 = "", const MyString &arg2 = "",                    \
+                     const MyString &arg3 = "", const MyString &arg4 = "",     \
+                     const MyString &arg5 = "", const MyString &arg6 = "",     \
+                     const MyString &arg7 = "", const MyString &arg8 = "",     \
+                     const MyString &arg9 = "", const MyString &argA = ""
 
 class Abortable;
 
@@ -111,25 +111,23 @@ class Abortable;
  * @author Jean-Francois Fabre
  */
 
-class Abortable
-{
+class Abortable {
 public:
   /**
    * debug level mask
    */
 
-  enum DebugLevelMask
-    {
-      //DBG_main           = 1,     ///< main program
-      DBG_profiler       = 1<<12, ///< performance profiling mode
-      DBG_alloc          = 1<<13, ///< memory allocation logging
-      DBG_no_warnings    = 1<<15, ///< suppress warnings
-      DBG_trace_mode     = 0x10000, ///< function entrypoint trace mode
-      DBG_all            = 0xFFFFFF ///< all of the above
-    };
+  enum DebugLevelMask {
+    // DBG_main           = 1,     ///< main program
+    DBG_profiler = 1 << 12,    ///< performance profiling mode
+    DBG_alloc = 1 << 13,       ///< memory allocation logging
+    DBG_no_warnings = 1 << 15, ///< suppress warnings
+    DBG_trace_mode = 0x10000,  ///< function entrypoint trace mode
+    DBG_all = 0xFFFFFF         ///< all of the above
+  };
 
 #ifdef _WIN32
-  typedef std::map<FunctionTimer,FunctionId> ProfilerTable;
+  typedef std::map<FunctionTimer, FunctionId> ProfilerTable;
 #endif
 
   /**
@@ -145,32 +143,18 @@ public:
    * </UL>
    */
 
-  class EntryPoint : public std::exception
-  {
-    public:
-    const char *what() const throw()
-    {
-      return "";
-    }
+  class EntryPoint : public std::exception {
+  public:
+    const char *what() const throw() { return ""; }
 
-    EntryPoint(const Abortable *obj,
-	       const char *method,
-	       const char *filename,
-	       const int line_number,
-	       const int debug_level)
-    :
-    m_reference(obj),
-    m_method(method),
-    m_filename(filename),
-    m_class(obj == NULL ? "?" : obj->get_string_type()),
-    m_name(obj == NULL ? "?" : obj->get_name()),
-    m_line_number(line_number),
-    m_debug_level(debug_level)
-    {
-    }
+    EntryPoint(const Abortable *obj, const char *method, const char *filename,
+               const int line_number, const int debug_level)
+        : m_reference(obj), m_method(method), m_filename(filename),
+          m_class(obj == NULL ? "?" : obj->get_string_type()),
+          m_name(obj == NULL ? "?" : obj->get_name()),
+          m_line_number(line_number), m_debug_level(debug_level) {}
 
-    ~EntryPoint() throw()
-    {}
+    ~EntryPoint() throw() {}
 
     // object reference
 
@@ -194,10 +178,10 @@ public:
 #ifdef _HAS_THREADS
     FunctionTimer m_profile_info;
 #endif
-
   };
+
 private:
-  MyString m_name;  ///< name of the instance of the object
+  MyString m_name;          ///< name of the instance of the object
   bool m_user_level_object; ///< whether the object is a user object
 
   /**
@@ -208,8 +192,6 @@ private:
   static MyString get_location_prefix(const EntryPoint &ep);
 
 public:
-
-
   /**
    * get current registered entrypoint
    *
@@ -224,18 +206,14 @@ public:
    * profiler information
    */
 
-  class ProfilerInfo : protected FunctionTimer
-  {
-    public:
-    ProfilerInfo(const FunctionTimer &ft,
-		 const MyString &class_name,
-		 const MyString &method_name);
+  class ProfilerInfo : protected FunctionTimer {
+  public:
+    ProfilerInfo(const FunctionTimer &ft, const MyString &class_name,
+                 const MyString &method_name);
 
-    const MyString &get_function_name() const
-    {
-      return m_function_name;
-    }
-    private:
+    const MyString &get_function_name() const { return m_function_name; }
+
+  private:
     MyString m_function_name;
   };
 
@@ -248,24 +226,18 @@ public:
    * cause of an exception
    */
 
-  class Cause : public EntryPoint
-  {
-    public:
-    Cause(const MyString &error_message,
-	  const EntryPoint &entrypoint);
+  class Cause : public EntryPoint {
+  public:
+    Cause(const MyString &error_message, const EntryPoint &entrypoint);
 
     const char *what() const throw();
 
-    const char *msg() const
-    {
-      return m_message.c_str();
-    }
+    const char *msg() const { return m_message.c_str(); }
 
-    ~Cause() throw()
-    {}
+    ~Cause() throw() {}
 
-    private:
-    MyString m_message; ///< error message
+  private:
+    MyString m_message;         ///< error message
     MyString m_context_message; ///< context + message
   };
 
@@ -283,10 +255,7 @@ public:
    * @return logical instance name
    */
 
-  const MyString &get_name()  const
-  {
-    return m_name;
-  }
+  const MyString &get_name() const { return m_name; }
 
   /**
    * set logical instance name
@@ -298,18 +267,14 @@ public:
    * @return true if this is a user-level object
    */
 
-  bool is_user_level_object() const
-  {
-    return m_user_level_object;
-  }
+  bool is_user_level_object() const { return m_user_level_object; }
 
   /**
    * check if the current stack is within the context of
    * an object (referred to by its name or type)
    */
 
-  static bool is_within_context(const char *object_name,
-				bool by_class = false);
+  static bool is_within_context(const char *object_name, bool by_class = false);
 
   /**
    * get object "class"
@@ -327,13 +292,12 @@ public:
    * return debug level
    */
 
-  inline int get_debug_level() const
-  {
-        #ifdef NDEBUG
+  inline int get_debug_level() const {
+#ifdef NDEBUG
     return 0;
-        #else
+#else
     return m_debug_level;
-        #endif
+#endif
   }
 
   /**
@@ -347,7 +311,6 @@ public:
    */
 
   void add_debug_level(const int dmsk);
-
 
   /**
    * merged list of elapsed times on all threads
@@ -375,43 +338,35 @@ public:
    */
 
   template <class E>
-    MyString enum_to_string(const char *strs[],
-			    const E val,
-			    const E enum_first_value = (E)0,
-			    const bool use_bit_model = false) const
-  {
+  MyString enum_to_string(const char *strs[], const E val,
+                          const E enum_first_value = (E)0,
+                          const bool use_bit_model = false) const {
     MyString str;
     bool found = false;
 
     ENTRYPOINT(enum_to_string);
 
-    if (use_bit_model)
-      {
-	int i=0;
-	int ec = enum_first_value;
+    if (use_bit_model) {
+      int i = 0;
+      int ec = enum_first_value;
 
-	while ((strs[i] != NULL) && (!found))
-	  {
-	    found = (ec == val);
-	    if (found)
-	      {
-		str = strs[i];
-	      }
-	    i++;
-	    ec = ec<<1;
-	  }
-
-      }
-    else
-      {
-	str = strs[val-enum_first_value];
-	found = true;
+      while ((strs[i] != NULL) && (!found)) {
+        found = (ec == val);
+        if (found) {
+          str = strs[i];
+        }
+        i++;
+        ec = ec << 1;
       }
 
-    if (!found)
-      {
-	abort_run("Value out %d of range",val);
-      }
+    } else {
+      str = strs[val - enum_first_value];
+      found = true;
+    }
+
+    if (!found) {
+      abort_run("Value out %d of range", val);
+    }
     EXITPOINT;
 
     return str;
@@ -429,42 +384,33 @@ public:
    */
 
   template <class E>
-    void string_to_enum(const MyString &str,
-			const char *strs[],
-			E &rval,
-			const E enum_first_value = (E)0,
-			const bool use_bit_model = false) const
-  {
+  void string_to_enum(const MyString &str, const char *strs[], E &rval,
+                      const E enum_first_value = (E)0,
+                      const bool use_bit_model = false) const {
     ENTRYPOINT(string_to_enum);
 
-    int string_idx=0;
-    int enum_idx=enum_first_value;
+    int string_idx = 0;
+    int enum_idx = enum_first_value;
 
     bool found = false;
-    while ((strs[string_idx] != NULL) && (!found))
-      {
-	bool found = (str == strs[string_idx]);
+    while ((strs[string_idx] != NULL) && (!found)) {
+      bool found = (str == strs[string_idx]);
 
-	if (found)
-	  {
-	    rval = (E)enum_idx;
-	  }
-	if (use_bit_model)
-	  {
-	    enum_idx = (enum_idx==0) ? 1 : enum_idx<<1;
-	  }
-	else
-	  {
-	    enum_idx++;
-	  }
-
-	string_idx++;
+      if (found) {
+        rval = (E)enum_idx;
+      }
+      if (use_bit_model) {
+        enum_idx = (enum_idx == 0) ? 1 : enum_idx << 1;
+      } else {
+        enum_idx++;
       }
 
-    if (!found)
-      {
-	abort_run("Enumerate value %s not found",str);
-      }
+      string_idx++;
+    }
+
+    if (!found) {
+      abort_run("Enumerate value %s not found", str);
+    }
 
     EXITPOINT;
   }
@@ -522,17 +468,14 @@ protected:
    * called by the ENTRYPOINT macro, do not be called directly
    */
 
-  void enter_method
-    (const char *mname,
-    const char *fname,
-    const int line_number) const;
+  void enter_method(const char *mname, const char *fname,
+                    const int line_number) const;
 
   /**
    * called by the EXITPOINT macro, do not be called directly
    */
 
-  void exit_method(const char *fname ,
-		   const int line_number) const;
+  void exit_method(const char *fname, const int line_number) const;
 
   /**
    * set stack to current object
@@ -540,17 +483,14 @@ protected:
    */
   bool pop_stack_to_current() const;
 
-
   /**
    * print an error with its exact location,
    * useful (only) when called from without an exception
    */
 
-  void error_nothrow(const MyString &s)
-  {
-    error(Cause(s,get_current_entrypoint()),false);
+  void error_nothrow(const MyString &s) {
+    error(Cause(s, get_current_entrypoint()), false);
   }
-
 
   /**
    * dynamic cast with error check and reference return value
@@ -559,27 +499,20 @@ protected:
    * get_string_type()
    */
 
-  template <class T,class U>
-      inline T &safe_cast(U *value) const
-  {
-    T *rval = dynamic_cast<T*>(value);
+  template <class T, class U> inline T &safe_cast(U *value) const {
+    T *rval = dynamic_cast<T *>(value);
 #ifndef NDEBUG
-    #ifndef __amigaos__
-    if (rval == 0)
-      {
-	// try to make a more accurate error
-	const Abortable *ab = dynamic_cast<const Abortable *>(value);
-	if (ab == 0)
-	  {
-	    abort_run("Internal error, cannot dynamic cast");
-	  }
-	else
-	  {
-	    abort_run("Internal error, cannot dynamic cast "
-		      "object of type %q",ab->get_string_type());
-	  }
+    if (rval == 0) {
+      // try to make a more accurate error
+      const Abortable *ab = dynamic_cast<const Abortable *>(value);
+      if (ab == 0) {
+        abort_run("Internal error, cannot dynamic cast");
+      } else {
+        abort_run("Internal error, cannot dynamic cast "
+                  "object of type %q",
+                  ab->get_string_type());
       }
-    #endif
+    }
 #endif
 
     return *rval;
@@ -588,4 +521,3 @@ protected:
   static int m_debug_level;
 };
 #undef MSG_ARG_PROTO
-

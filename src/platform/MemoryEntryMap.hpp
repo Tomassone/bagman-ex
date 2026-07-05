@@ -3,7 +3,7 @@
 
 #define LOGGED_FCLOSE(f) fclose(f); f = 0
 
-#if defined NDEBUG || defined _NDS || defined __amigaos__ || defined NO_MEMORY_LOG
+#if defined NDEBUG || defined NO_MEMORY_LOG
 #define LOGGED_MEMORY_START ((void)0)
 #define LOGGED_MANUAL_ALLOC(expr) ((void)0)
 #define LOGGED_MANUAL_DELETE(addr) ((void)0)

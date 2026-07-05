@@ -2,8 +2,8 @@
 #define ANIMATEDSPRITE_H_INCLUDED
 
 #include "AnimatedObject.hpp"
-#include "MyVector.hpp"
 #include "GfxFrame.hpp"
+#include "MyVector.hpp"
 
 class GfxFrameSet;
 
@@ -11,8 +11,7 @@ class GfxFrameSet;
  * animated object/character on screen
  */
 
-class AnimatedSprite : public AnimatedObject
-{
+class AnimatedSprite : public AnimatedObject {
 public:
   DEF_GET_STRING_TYPE(AnimatedSprite);
 
@@ -36,19 +35,14 @@ public:
    */
   void set_xy_render_offset(int x_offset, int y_offset);
 
-  void set_xy_render_extra_offset(int x_offset, int y_offset)
-   #ifdef __amigaos
-  {(void)x_offset;(void)y_offset;}  // define as empty
-#else
-  ;
-  #endif
+  void set_xy_render_extra_offset(int x_offset, int y_offset);
 
-  /**
-   * update the animation
-   * @param elapsed time in millis since last update
-   */
+      /**
+       * update the animation
+       * @param elapsed time in millis since last update
+       */
 
-  void update(int elapsed);
+      void update(int elapsed);
 
   /**
    * render the sprite in the screen
@@ -68,29 +62,20 @@ public:
 
   void set_frame_set(const GfxFrameSet *frame_set);
 
-  inline int get_update_rate() const
-  {
-    return m_update_rate;
-  }
-
+  inline int get_update_rate() const { return m_update_rate; }
 
   void set_render_scale(int scale);
 
-
   void set_update_rate(int update_rate);
-private:
 
+private:
   const GfxFrameSet *m_frames = nullptr;
   int m_update_rate = 0;
   int m_elapsed = 0;
   int m_x_render_offset = 0;
   int m_y_render_offset = 0;
-  #ifndef __amigaos__
   int m_x_render_extra_offset = 0;
   int m_y_render_extra_offset = 0;
-  #endif
-
-
 };
 
 #endif // ANIMATEDSEQUENCE_H_INCLUDED

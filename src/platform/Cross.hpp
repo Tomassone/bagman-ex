@@ -3,9 +3,6 @@
 
 #include <SDL/SDL.h>
 #include "Abortable.hpp"
-#ifdef _NDS
-#define SDL_Delay DO_NOT_CALL_THIS_SDL_DELAY_SHIT
-#endif
 
 class Cross : public Abortable
 {

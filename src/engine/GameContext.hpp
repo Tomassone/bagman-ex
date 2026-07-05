@@ -2,18 +2,18 @@
 #define GAMECONTEXT_H_INCLUDED
 
 #include "Abortable.hpp"
-#include "TimerEvent.hpp"
-#include <list>
-#include "SDL/SDL.h"
-#include "PlayerControls.hpp"
+#include "DisplayDepth.hpp"
 #include "Drawable.hpp"
 #include "ImageFrame.hpp"
+#include "PlayerControls.hpp"
 #include "PointerList.hpp"
-#include "DisplayDepth.hpp"
+#include "SDL/SDL.h"
 #include "SdlColorPalette.hpp"
+#include "TimerEvent.hpp"
+#include <list>
 
-class GameContext : public Abortable
-{
+
+class GameContext : public Abortable {
 public:
   DEF_GET_STRING_TYPE(GameContext);
 
@@ -45,12 +45,10 @@ protected:
   void apply_alpha_rgb(int alpha_rgb, const SDL_Rect &bounds);
   void apply_alpha_rgb(int alpha_rgb);
   void add_timer_event(TimerEvent &te);
-  void quit_requested()
-  {
-    m_quit_requested = true;
-  }
+  void quit_requested() { m_quit_requested = true; }
   Drawable m_screen;
   PlayerControls::Status m_input;
+
 private:
   void apply_alpha_rgb(int alpha_rgb, const SDL_Rect *bounds);
   bool m_quit_requested;
@@ -58,17 +56,13 @@ private:
 #if DISPLAY_DEPTH > 8
   ImageFrame m_fadeout_buffer;
 #else
-  #ifndef __amigaos__
   SdlColorPalette m_palette;
-  #endif
 #endif
 
   PlayerControls m_controls;
   virtual GameContext *private_update(int elapsed) = 0;
   virtual void private_init() = 0;
-  PointerList<TimerEvent,false> m_events;
-
-
+  PointerList<TimerEvent, false> m_events;
 };
 
 #endif // GAMECONTEXT_H_INCLUDED
