@@ -7,7 +7,7 @@ const MyString DirectoryBase::LEVEL_EXTENSION = ".mlv";
 /*static */
 MyString DirectoryBase::get_root() {
   // native mode
-  return "resource";
+  return "../../resource";
 }
 
 MyString DirectoryBase::get_sound_path() { return get_root() / "../sound"; }

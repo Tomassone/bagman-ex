@@ -9,10 +9,8 @@
  * without danger of memory leaks/double frees
  */
 
-class ImageFrame : public Drawable
-{
+class ImageFrame : public Drawable {
 public:
-
   DEF_GET_STRING_TYPE(ImageFrame);
 
   /**
@@ -25,10 +23,7 @@ public:
   void init(SDL_Surface *source, bool alpha);
   void set_alpha(int alpha);
 
-  bool get_alpha() const
-  {
-    return m_alpha;
-  }
+  bool get_alpha() const { return m_alpha; }
 
   /**
    * initialize from image file
@@ -79,7 +74,6 @@ private:
   void destroy();
   bool m_alpha;
   void copy_from(const ImageFrame &other);
-
 };
 
 #endif // IMAGEFRAME_H_INCLUDED

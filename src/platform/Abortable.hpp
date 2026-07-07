@@ -1,6 +1,7 @@
 #pragma once
 
 #include "FunctionTimer.hpp"
+#include "FunctionId.hpp"
 #include "GsDefine.hpp"
 #include "MyMacros.hpp"
 #include "MyString.hpp"
