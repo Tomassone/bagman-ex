@@ -43,8 +43,3 @@ as faithfully as possible.
 - ground-disappearing bug found when trying to drop a bag off a ledge in screen 3 in the elevator shaft.
 - extra easy difficulty level
 - fully credits Jacques Brisse for his work
-
-## What's better in the MAME version:
-
-- exact original AI (of course!)
-- high scores
