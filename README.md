@@ -1,15 +1,16 @@
-# BagmanEx Remake (based on a previous project by JOTD)
+# BagmanEx Remake
 
 <p align="center">
   <img src="screen.png" alt="Bagman Remake Screenshot" width="400">
 </p>
 
-Original game by Valadon Automation
-ROM strings show that it has been coded by Jacques Brisse (still head of Valadon)
+Original arcade game by Valadon Automation.
+ROM strings show that it has been coded by Jacques Brisse (still head of Valadon).
 
 Game has been resourced (Z80) and guard behaviour/speed has been reproduced
 as faithfully as possible.
 
+Based on a previous project by [french programmer Jean-François Fabr](https://github.com/jotd666)e.
 Now with Linux support!
 
 ## Options:
