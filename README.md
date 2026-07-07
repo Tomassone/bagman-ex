@@ -6,6 +6,8 @@ ROM strings show that it has been coded by Jacques Brisse (still head of Valadon
 Game has been resourced (Z80) and guard behaviour/speed has been reproduced
 as faithfully as possible.
 
+Now with Linux support added!
+
 ## Options:
 
 + -a: panoramic 3-screen windowed mode
