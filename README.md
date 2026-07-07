@@ -10,7 +10,7 @@ ROM strings show that it has been coded by Jacques Brisse (still head of Valadon
 Game has been resourced (Z80) and guard behaviour/speed has been reproduced
 as faithfully as possible.
 
-Based on a previous project by [french programmer Jean-François Fabr](https://github.com/jotd666)e.
+Based on a previous project by [french programmer Jean-François Fabre](https://github.com/jotd666).
 Now with Linux support!
 
 ## Options:
