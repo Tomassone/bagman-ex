@@ -200,7 +200,7 @@ public:
       screen = system_stub.init_io(silent, full_screen, sw, sh);
 
       if (!full_screen) {
-        SDL_WM_SetCaption("Bagman", "bagman");
+        SDL_WM_SetCaption("BagmanEx", "bagman");
       }
 
       debug("init video complete");

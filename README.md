@@ -1,4 +1,8 @@
-# Bagman remake by JOTD in 2010-2015 (originally)
+# Bagman Remake by JOTD in 2010-2015 (originally)
+
+<p align="center">
+  <img src="screen.png" alt="Bagman Remake Screenshot" width="400">
+</p>
 
 Original game by Valadon Automation
 ROM strings show that it has been coded by Jacques Brisse (still head of Valadon)
@@ -45,3 +49,50 @@ Now with Linux support!
 - ground-disappearing bug found when trying to drop a bag off a ledge in screen 3 in the elevator shaft.
 - extra easy difficulty level
 - fully credits Jacques Brisse for his work
+
+## Building on Linux
+
+### Dependencies
+
+Debian/Ubuntu:
+
+```bash
+sudo apt install build-essential meson ninja-build libsdl1.2-dev libsdl-mixer1.2-dev
+```
+
+### Configure
+
+From the project root:
+
+```bash
+meson setup builddir
+```
+
+### Build
+
+```bash
+meson compile -C builddir
+```
+
+### Run
+
+The game currently expects to be run from the project root:
+
+```bash
+./builddir/src/bagman
+```
+
+### Reconfigure
+
+If you modify the Meson build files:
+
+```bash
+meson setup builddir --reconfigure
+```
+
+or delete the build directory and configure again:
+
+```bash
+rm -rf builddir
+meson setup builddir
+```
