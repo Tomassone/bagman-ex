@@ -8,12 +8,12 @@ as faithfully as possible.
 
 ## Options:
 
--a: panoramic 3-screen windowed mode
--s: no sound
--g: direct game
--j: joystick
--i: invincible mode (cheat!!!)
--f: full screen (lower part truncated since no HW rescaling)
++ -a: panoramic 3-screen windowed mode
++ -s: no sound
++ -g: direct game
++ -j: joystick
++ -i: invincible mode (cheat!!!)
++ -f: full screen (lower part truncated since no HW rescaling)
 
 ## Keys:
 
