@@ -1,4 +1,4 @@
-# Bagman Remake by JOTD in 2010-2015 (originally)
+# BagmanEx Remake (based on a previous project by JOTD)
 
 <p align="center">
   <img src="screen.png" alt="Bagman Remake Screenshot" width="400">
