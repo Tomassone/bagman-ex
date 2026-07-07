@@ -1,4 +1,4 @@
-Bagman remake by JOTD in 2010-2015
+# Bagman remake by JOTD in 2010-2015 (originally)
 
 Original game by Valadon Automation
 ROM strings show that it has been coded by Jacques Brisse (still head of Valadon)
@@ -6,7 +6,7 @@ ROM strings show that it has been coded by Jacques Brisse (still head of Valadon
 Game has been resourced (Z80) and guard behaviour/speed has been reproduced
 as faithfully as possible.
 
-Options:
+## Options:
 
 -a: panoramic 3-screen windowed mode
 -s: no sound
@@ -15,7 +15,7 @@ Options:
 -i: invincible mode (cheat!!!)
 -f: full screen (lower part truncated since no HW rescaling)
 
-Keys:
+## Keys:
 
 - joystick or cursor keys: directions
 - fire or ctrl: action
@@ -23,7 +23,7 @@ Keys:
 - ESC: quit current game
 - F10: quit program
 
-What's better than the MAME version:
+## What's better than the MAME version:
 
 - game is slightly less unfair when you change screens with guards tailgating you (in the original game
   you find guard ahead of you in the next screen and you die). Same thing with the wagons
@@ -44,7 +44,7 @@ What's better than the MAME version:
 - extra easy difficulty level
 - fully credits Jacques Brisse for his work :)
 
-What's better in the MAME version:
+## What's better in the MAME version:
 
 - exact original AI (of course!)
 - high scores
