@@ -12,7 +12,7 @@ as faithfully as possible.
 + -s: no sound
 + -g: direct game
 + -j: joystick
-+ -i: invincible mode (cheat!!!)
++ -i: invincible mode (cheat)
 + -f: full screen (lower part truncated since no HW rescaling)
 
 ## Keys:
@@ -29,7 +29,7 @@ as faithfully as possible.
   you find guard ahead of you in the next screen and you die). Same thing with the wagons
 - guards have some extra animation when killed (same as the player actually)
 - sometimes AI seems better than the original, in particular when guard are stuck (which is rare)
-- panoramic mode (Windows version only)
+- panoramic mode
 - fadein/fadeout effects
 - C++/SDL source code included means fully portable
 - original Z80 asm source included (not fully resourced, but there's most of the interesting parts)
@@ -42,7 +42,7 @@ as faithfully as possible.
   to last screen right after appearing in the first screen.
 - ground-disappearing bug found when trying to drop a bag off a ledge in screen 3 in the elevator shaft.
 - extra easy difficulty level
-- fully credits Jacques Brisse for his work :)
+- fully credits Jacques Brisse for his work
 
 ## What's better in the MAME version:
 

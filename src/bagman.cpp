@@ -200,7 +200,7 @@ public:
       screen = system_stub.init_io(silent, full_screen, sw, sh);
 
       if (!full_screen) {
-        SDL_WM_SetCaption("Bagman Remake v1.3 by JOTD in 2015-2020", "bagman");
+        SDL_WM_SetCaption("Bagman", "bagman");
       }
 
       debug("init video complete");
