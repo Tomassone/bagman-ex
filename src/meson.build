@@ -69,7 +69,7 @@ common_sources = files(
 
 platform_sources = []
 
-if host_machine.system() == 'linux' or host_machine.system() == 'windows'
+if host_machine.system() in ['linux', 'windows']
 
     backend_sources = files(
 		'backend/sdl/ImageUtil.cpp',
