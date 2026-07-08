@@ -1,95 +1,82 @@
-if host_machine.system() == 'linux'
-    inc = include_directories(
-        '.',
-        'engine',
-        'gfx',
-        'characters',
-        'platform',
-        'platform/linux',
-    )
-elif host_machine.system() == 'windows'
-    inc = include_directories(
-        '.',
-        'engine',
-        'gfx',
-        'characters',
-        'platform',
-        'platform/windows',
-    )
-endif
+inc = include_directories(
+    '.',
+    'core',
+    'engine',
+    'gfx',
+    'characters',
+    'backend',
+    'backend/sdl',
+)
 
 common_sources = files(
     'bagman.cpp',
 
+    # Engine
     'engine/AnimatedObject.cpp',
-	'engine/AnimatedSprite.cpp',
-	'engine/DirectoryBase.cpp',
-	'engine/FadeEvent.cpp',
-	'engine/FadeInEvent.cpp',
-	'engine/FadeOutEvent.cpp',
-	'engine/FrameCouple.cpp',
-	'engine/GameContext.cpp',
-	'engine/GfxFrame.cpp',
-	'engine/GfxFrameSet.cpp',
-	'engine/GfxObject.cpp',
-	'engine/GfxObjectLayer.cpp',
-	'engine/GfxPalette.cpp',
-	'engine/JoystickHandler.cpp',
-	'engine/Locatable.cpp',
-	'engine/MenuScreen.cpp',
-	'engine/MPDomain.cpp',
-	'engine/MPLevel.cpp',
-	'engine/OptionsBase.cpp',
-	'engine/PlayerControls.cpp',
-	'engine/RandomEvent.cpp',
-	'engine/SoundSet.cpp',
-	'engine/TileGrid.cpp',
+    'engine/AnimatedSprite.cpp',
+    'engine/DirectoryBase.cpp',
+    'engine/FadeEvent.cpp',
+    'engine/FadeInEvent.cpp',
+    'engine/FadeOutEvent.cpp',
+    'engine/FrameCouple.cpp',
+    'engine/GameContext.cpp',
+    'engine/GfxFrame.cpp',
+    'engine/GfxFrameSet.cpp',
+    'engine/GfxObject.cpp',
+    'engine/GfxObjectLayer.cpp',
+    'engine/GfxPalette.cpp',
+    'engine/JoystickHandler.cpp',
+    'engine/Locatable.cpp',
+    'engine/MenuScreen.cpp',
+    'engine/MPDomain.cpp',
+    'engine/MPLevel.cpp',
+    'engine/OptionsBase.cpp',
+    'engine/PlayerControls.cpp',
+    'engine/RandomEvent.cpp',
+    'engine/SoundSet.cpp',
+    'engine/TileGrid.cpp',
 
+    # Graphics
     'gfx/ColorPalette.cpp',
-	'gfx/Drawable.cpp',
-	'gfx/FontLetter.cpp',
-	'gfx/Fonts.cpp',
-	'gfx/ImageFrame.cpp',
-	'gfx/SdlColorPalette.cpp',
-	'gfx/SDLRectangle.cpp',
+    'gfx/Drawable.cpp',
+    'gfx/FontLetter.cpp',
+    'gfx/Fonts.cpp',
+    'gfx/ImageFrame.cpp',
+    'gfx/SdlColorPalette.cpp',
+    'gfx/SDLRectangle.cpp',
 
+    # Characters
     'characters/Character.cpp',
-	'characters/Elevator.cpp',
-	'characters/Guard.cpp',
-	'characters/HumanCharacter.cpp',
-	'characters/Player.cpp',
-	'characters/Wagon.cpp',
-	
-	'platform/Abortable.cpp',
-	'platform/Cross.cpp',
-	'platform/dernc.cpp',
-	'platform/FunctionId.cpp',
-	'platform/GsTime.cpp',
-	'platform/ImageUtil.cpp',
-	'platform/MemoryEntry.cpp',
-	'platform/MemoryEntryMap.cpp',
-	'platform/MyAssert.cpp',
-	'platform/MyFile.cpp',
-	'platform/MyString.cpp',
-	'platform/RandomNumber.cpp',
-	'platform/SoundPlay.cpp',
+    'characters/Elevator.cpp',
+    'characters/Guard.cpp',
+    'characters/HumanCharacter.cpp',
+    'characters/Player.cpp',
+    'characters/Wagon.cpp',
+
+    # Core
+    'core/Abortable.cpp',
+    'core/Cross.cpp',
+    'core/dernc.cpp',
+    'core/FunctionId.cpp',
+    'core/GsTime.cpp',
+    'core/MemoryEntry.cpp',
+    'core/MemoryEntryMap.cpp',
+    'core/MyAssert.cpp',
+    'core/MyFile.cpp',
+    'core/MyString.cpp',
+    'core/RandomNumber.cpp',
 )
 
 platform_sources = []
 
-if host_machine.system() == 'linux'
+if host_machine.system() == 'linux' or host_machine.system() == 'windows'
 
-    platform_sources += files(
-        'platform/linux/FunctionTimer.cpp',
-		'platform/linux/MicrosecsClock.cpp',
-    )
-
-elif host_machine.system() == 'windows'
-
-    platform_sources += files(
-        'platform/windows/FunctionTimer.cpp',
-		'platform/windows/MicrosecsClock.cpp',
-    )
+    backend_sources = files(
+		'backend/sdl/ImageUtil.cpp',
+		'backend/sdl/SoundPlay.cpp',
+		'backend/sdl/FunctionTimer.cpp',
+		'backend/sdl/MicrosecsClock.cpp',
+	)
 
 else
 
@@ -99,7 +86,7 @@ endif
 
 executable(
     'bagman',
-    common_sources + platform_sources,
+    common_sources + backend_sources,
     include_directories : inc,
     dependencies : [
         sdl,
