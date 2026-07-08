@@ -39,7 +39,6 @@ Now with Linux support!
 - panoramic mode
 - fadein/fadeout effects
 - C++/SDL source code included means fully portable
-- original Z80 asm source included (not fully resourced, but there's most of the interesting parts)
 - settings/DSW that you can save
 - eats a lot less CPU than the MAME version
 - MAME version needs to hardware scale the screen in full screen mode. This version changes screen layout:
